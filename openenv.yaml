@@ -1,0 +1,26 @@
+name: FarmingEnv
+description: Simple turn-based farming simulation with random weather, soil moisture changes, crop growth, and health.
+
+actions:
+  - water
+  - plant
+  - harvest
+  - wait
+
+observation_fields:
+  - day
+  - soil_moisture
+  - weather
+  - crop_stage
+  - health
+
+tasks:
+  - name: easy_keep_crop_alive
+    description: Keep the crop alive for 10 days (crop_stage > 0 and health > 0 throughout).
+
+  - name: medium_maintain_health_above_70
+    description: Maintain crop health above 70 for 20 days (health > 70 and crop_stage > 0 throughout).
+
+  - name: hard_maximize_harvest_yield
+    description: Maximize harvest yield within 30 days (aim for a high total reward from successful harvest steps).
+
