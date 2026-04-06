@@ -199,13 +199,14 @@ def generate_graph(history, sim_complete=False):
     
     plt.tight_layout()
     
-    # Convert to base64
+    # Convert to PIL Image
     buf = io.BytesIO()
     plt.savefig(buf, format='png', dpi=100, bbox_inches='tight')
     plt.close()
     buf.seek(0)
     
-    return buf
+    from PIL import Image
+    return Image.open(buf)
 
 
 def run_simulation(seed=0):
@@ -312,4 +313,6 @@ with demo:
     )
 
 if __name__ == "__main__":
-    demo.launch(server_name="0.0.0.0", server_port=7861, share=True)
+    import os
+    port = int(os.getenv("GRADIO_SERVER_PORT", "7861"))
+    demo.launch(server_name="0.0.0.0", server_port=port, share=True)
