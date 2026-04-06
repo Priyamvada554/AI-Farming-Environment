@@ -9,11 +9,15 @@ Policy:
 
 from __future__ import annotations
 
+from typing import Optional
+
 from farming_env import FarmingEnv
 
 
 def choose_action(env: FarmingEnv) -> str:
     """Pick the next action using the simple rule-based policy."""
+    if env.crop_stage == 0:
+        return "plant"
     if env.soil_moisture < 0.30:
         return "water"
     if env.crop_stage >= 3:
@@ -32,7 +36,7 @@ def explain_action(env: FarmingEnv, action: str) -> str:
     return "no urgent needs -> wait"
 
 
-def run_one_episode(seed: int | None = 0) -> float:
+def run_one_episode(seed: Optional[int] = 0) -> float:
     env = FarmingEnv(max_days=30, seed=seed)
     state = env.reset()
 

@@ -8,7 +8,7 @@ from __future__ import annotations
 
 import random
 from dataclasses import dataclass
-from typing import Any, Dict, Tuple
+from typing import Any, Dict, Optional, Tuple
 
 
 @dataclass
@@ -26,7 +26,7 @@ class FarmingEnv:
 
     # Episode ends after this many days.
     max_days: int = 30
-    seed: int | None = None
+    seed: Optional[int] = None
 
     # --- Required state fields ---
     day: int = 0
@@ -63,8 +63,8 @@ class FarmingEnv:
 
     def reset(
         self,
-        seed: int | None = None,
-        episode_id: str | None = None,
+        seed: Optional[int] = None,
+        episode_id: Optional[str] = None,
         **kwargs: Any,
     ) -> Dict[str, Any]:
         """
