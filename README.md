@@ -4,7 +4,7 @@ emoji: 🚀
 colorFrom: gray
 colorTo: pink
 sdk: gradio
-sdk_version: 6.11.0
+sdk_version: 5.23.0
 app_file: app.py
 pinned: false
 license: mit
@@ -63,7 +63,7 @@ The system includes:
 
 ## 🖼️ Demo
 
-Try it live on Hugging Face Spaces: [Link will be provided after deployment]
+Try it live on Hugging Face Spaces: [🚀 Click Here](https://huggingface.co/spaces/Priyambada544/Ai-Farming-Simulator)
 
 ---
 
@@ -95,23 +95,18 @@ Try it live on Hugging Face Spaces: [Link will be provided after deployment]
 ---
 
 ## 📁 Project Structure
-
-```
-app.py → Gradio web interface
-farming_env.py → Core environment
-farming_tasks.py → Task definitions
-farming_grader.py → Evaluation logic
+app.py                    → Gradio web interface
+farming_env.py            → Core environment
+farming_tasks.py          → Task definitions
+farming_grader.py         → Evaluation logic
 farming_rule_agent_demo.py → Demo agent
-requirements.txt → Python dependencies
-README.md → This file
-```
-
+requirements.txt          → Python dependencies
+README.md                 → This file
 ---
 
 ## ▶️ How to Run Locally
 
 ### Install Dependencies
-
 ```bash
 pip install -r requirements.txt
 ```
@@ -119,7 +114,6 @@ pip install -r requirements.txt
 ### Run the Web App
 
 On Windows with the local virtual environment:
-
 ```powershell
 .\.venv\Scripts\python.exe app.py
 ```
@@ -143,7 +137,6 @@ Open the app in your browser at the URL shown in the terminal (usually `http://1
    - Visibility: Public
 
 3. **Upload Files**
-   - Download this project as ZIP
    - Upload all files to your Space:
      - `app.py`
      - `farming_env.py`
@@ -154,29 +147,13 @@ Open the app in your browser at the URL shown in the terminal (usually `http://1
      - `README.md`
 
 4. **Deploy**
-   - Click "Create Space"
    - Wait for build (usually 2-5 minutes)
-   - Your app will be live at: `https://[your-username].huggingface.co/spaces/ai-farming-simulator`
+   - Your app will be live at: `https://huggingface.co/spaces/Priyambada544/Ai-Farming-Simulator`
 
-### Troubleshooting
-
-- If build fails, check the logs in the Space settings
-- Ensure all Python files are uploaded
-- Requirements.txt should contain the current project dependencies:
-  - `gradio==4.44.1`
-  - `huggingface_hub==0.23.0`
-  - `jinja2<3.1`
-  - `matplotlib>=3.5.0`
-
-### Optional direct deployment
-
-If you prefer deploying from your local repository, install the Hugging Face CLI and run:
-
-```bash
-gradio deploy
-```
-
-Then follow the prompts to connect the Space and push the app.
+### Requirements
+gradio==5.23.0
+matplotlib>=3.5.0
+Pillow>=8.0.0
 
 ---
 
@@ -193,6 +170,8 @@ It can be extended to real-world smart farming systems.
 - Implemented AI decision-making using rewards
 - Demonstrated OpenEnv-compatible system
 
+---
+
 ## 🙌 Author
 
-Priyambada Kumari
+**Priyambada Kumari**
