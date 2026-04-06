@@ -1,5 +1,4 @@
 ---
-
 title: Ai Farming Simulator
 emoji: 🚀
 colorFrom: gray
@@ -9,8 +8,8 @@ sdk_version: 6.11.0
 app_file: app.py
 pinned: false
 license: mit
-
 ---
+
 # 🌱 AI Farming Environment Simulator
 
 ## 🚀 Overview
@@ -119,11 +118,13 @@ pip install -r requirements.txt
 
 ### Run the Web App
 
-```bash
-python app.py
+On Windows with the local virtual environment:
+
+```powershell
+.\.venv\Scripts\python.exe app.py
 ```
 
-Open in browser: http://localhost:7860 (or the URL shown in terminal)
+Open the app in your browser at the URL shown in the terminal (usually `http://127.0.0.1:7861` or `http://localhost:7861`).
 
 ---
 
@@ -161,9 +162,21 @@ Open in browser: http://localhost:7860 (or the URL shown in terminal)
 
 - If build fails, check the logs in the Space settings
 - Ensure all Python files are uploaded
-- Requirements.txt should contain:
+- Requirements.txt should contain the current project dependencies:
   - `gradio==4.44.1`
   - `huggingface_hub==0.23.0`
+  - `jinja2<3.1`
+  - `matplotlib>=3.5.0`
+
+### Optional direct deployment
+
+If you prefer deploying from your local repository, install the Hugging Face CLI and run:
+
+```bash
+gradio deploy
+```
+
+Then follow the prompts to connect the Space and push the app.
 
 ---
 
