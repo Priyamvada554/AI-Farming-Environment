@@ -1,11 +1,10 @@
 ---
-title: Ai Farming Simulator
-emoji: 🚀
-colorFrom: gray
-colorTo: pink
-sdk: gradio
-sdk_version: 5.23.0
-app_file: app.py
+title: AI Farming Simulator
+emoji: 🌾
+colorFrom: green
+colorTo: yellow
+sdk: docker
+app_port: 7860
 pinned: false
 license: mit
 ---
@@ -56,14 +55,14 @@ The system includes:
 - **Agent**: `farming_rule_agent_demo.py`
   - Rule-based agent that interacts with the environment
 
-- **Web App**: `app.py`
-  - Gradio interface for interactive simulation
+- **Inference API**: `inference.py`
+  - FastAPI server with `/reset`, `/step`, `/state` endpoints
 
 ---
 
 ## 🖼️ Demo
 
-Try it live on Hugging Face Spaces: [🚀 Click Here](https://huggingface.co/spaces/Priyambada544/Ai-Farming-Simulator)
+Live on Hugging Face Spaces: [🚀 Click Here](https://huggingface.co/spaces/Priyambada544/Ai-Farming-Simulator)
 
 ---
 
@@ -76,32 +75,83 @@ Try it live on Hugging Face Spaces: [🚀 Click Here](https://huggingface.co/spa
 
 ---
 
+## 🌍 Action Space
+
+| Action | Description |
+|--------|-------------|
+| `water` | Water the crop |
+| `plant` | Plant a new crop |
+| `harvest` | Harvest the crop |
+| `wait` | Do nothing |
+
+---
+
+## 👁️ Observation Space
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `day` | int | Current day (0-30) |
+| `soil_moisture` | float | Moisture level (0.0-1.0) |
+| `weather` | string | sunny / rainy / hot |
+| `crop_stage` | int | 0=empty, 1=sprout, 2=growing, 3=ready |
+| `health` | float | Plant health (0-100) |
+
+---
+
 ## 🧠 Reward System
 
 - ✅ Good crop health → Positive reward
-- 🌾 Successful harvest → High reward
-- ❌ Overwatering → Penalty
-- ❌ Dry soil → Penalty
+- 🌾 Successful harvest → High reward (+60 to +80)
+- ❌ Overwatering → Penalty (-3.0)
+- ❌ Dry soil → Penalty (-3.0)
+- ❌ Early harvest → Penalty (-6.0)
 
 ---
+
+## 📊 Baseline Scores
+
+| Task | Score |
+|------|-------|
+| easy_keep_crop_alive | 1.0 |
+| medium_maintain_health_above_70 | 1.0 |
+| hard_maximize_harvest_yield | 0.8 |
+
+---
+
+## 🔌 API Endpoints
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/` | GET | Health check |
+| `/reset` | POST | Reset environment |
+| `/step` | POST | Take an action |
+| `/state` | GET | Get current state |
+| `/action_space` | GET | Get available actions |
+| `/docs` | GET | Swagger UI |
+
+--- 
 
 ## 💻 Tech Stack
 
-- UI: Gradio
+- API: FastAPI
 - Backend: Python
 - Simulation: Custom OpenEnv-style environment
-- Deployment: Hugging Face Spaces
+- Deployment: Hugging Face Spaces (Docker)
 
 ---
 
-## 📁 Project Structure
-app.py                    → Gradio web interface
-farming_env.py            → Core environment
-farming_tasks.py          → Task definitions
-farming_grader.py         → Evaluation logic
+## 📁 Project Structure  
+
+inference.py               → FastAPI OpenEnv server
+farming_env.py             → Core environment
+farming_tasks.py           → Task definitions
+farming_grader.py          → Evaluation logic
 farming_rule_agent_demo.py → Demo agent
-requirements.txt          → Python dependencies
-README.md                 → This file
+openenv.yaml               → OpenEnv specification
+Dockerfile                 → Docker configuration
+requirements.txt           → Python dependencies
+README.md                  → This file
+
 ---
 
 ## ▶️ How to Run Locally
@@ -109,66 +159,29 @@ README.md                 → This file
 ### Install Dependencies
 ```bash
 pip install -r requirements.txt
+pip install fastapi uvicorn
 ```
 
-### Run the Web App
-
-On Windows with the local virtual environment:
-```powershell
-.\.venv\Scripts\python.exe app.py
+### Run the API Server
+```bash
+uvicorn inference:app --host 0.0.0.0 --port 7860
 ```
 
-Open the app in your browser at the URL shown in the terminal (usually `http://127.0.0.1:7861` or `http://localhost:7861`).
-
----
-
-## 🚀 Deploy to Hugging Face Spaces
-
-### Step-by-Step Instructions
-
-1. **Create a Hugging Face Account**
-   - Go to [huggingface.co](https://huggingface.co) and sign up
-
-2. **Create a New Space**
-   - Click "New Space" on your profile
-   - Name: `ai-farming-simulator` (or your choice)
-   - License: MIT
-   - SDK: Gradio
-   - Visibility: Public
-
-3. **Upload Files**
-   - Upload all files to your Space:
-     - `app.py`
-     - `farming_env.py`
-     - `farming_tasks.py`
-     - `farming_grader.py`
-     - `farming_rule_agent_demo.py`
-     - `requirements.txt`
-     - `README.md`
-
-4. **Deploy**
-   - Wait for build (usually 2-5 minutes)
-   - Your app will be live at: `https://huggingface.co/spaces/Priyambada544/Ai-Farming-Simulator`
-
-### Requirements
-gradio==5.23.0
-matplotlib>=3.5.0
-Pillow>=8.0.0
+Open Swagger UI: `http://localhost:7860/docs`
 
 ---
 
 ## 🌍 Why This Matters
 
-This project demonstrates how AI agents can learn decision-making in dynamic real-world environments like agriculture.
-It can be extended to real-world smart farming systems.
+This project demonstrates how AI agents can learn decision-making in dynamic real-world environments like agriculture. It can be extended to real-world smart farming systems.
 
 ---
 
 ## 🏁 Conclusion
 
-- Built a real-world simulation environment
-- Implemented AI decision-making using rewards
-- Demonstrated OpenEnv-compatible system
+- Built a real-world OpenEnv-compatible simulation environment
+- Implemented AI decision-making using rewards and penalties
+- Deployed with FastAPI + Docker on Hugging Face Spaces
 
 ---
 
