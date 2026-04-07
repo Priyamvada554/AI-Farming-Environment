@@ -5,12 +5,17 @@ description = "AI Farming Simulator project"
 authors = [
     {name = "Priyambada Kumari"}
 ]
+
 dependencies = [
     "fastapi",
     "uvicorn",
     "matplotlib>=3.5.0",
-    "Pillow>=8.0.0"
+    "Pillow>=8.0.0",
+    "openenv-core>=0.2.0"
 ]
+
+[project.scripts]
+start = "server.app:app"
 
 [build-system]
 requires = ["setuptools"]
