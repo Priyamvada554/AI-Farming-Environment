@@ -1,0 +1,17 @@
+[project]
+name = "ai-farming-simulator"
+version = "0.1.0"
+description = "AI Farming Simulator project"
+authors = [
+    {name = "Priyambada Kumari"}
+]
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "matplotlib>=3.5.0",
+    "Pillow>=8.0.0"
+]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
