@@ -33,3 +33,11 @@ def step(request: StepRequest):
 @app.get("/action_space")
 def action_space():
     return {"actions": list(env.action_space)}
+
+import uvicorn
+
+def main():
+    uvicorn.run("server.app:app", host="0.0.0.0", port=7860)
+
+if __name__ == "__main__":
+    main()
